@@ -66,11 +66,6 @@ myCircle.anchorY = 0
 myCircle.x = 500
 myCircle.y = 20
 
-
-
-
-
-
 -- set width of the border
 myCircle.strokeWidth = 20
 
