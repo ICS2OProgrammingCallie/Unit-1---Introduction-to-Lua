@@ -29,7 +29,7 @@ beetleship.y = display.contentHeight*1/3
 local function MoveShip(event)
 	-- adds the scroll speed to the x-value of the ship
 	beetleship.x = beetleship.x + scrollSpeed
-	-- change the transperency of the ship every time it ,mpoves so that it fades out
+	-- change the transperency of the ship every time it moves so that it fades out
 	beetleship.alpha = beetleship.alpha + 0.01
 end
 
@@ -39,7 +39,7 @@ Runtime:addEventListener("enterFrame", MoveShip)
 -------------------------------------------------------------------------------------------------------------
 
 -- global variables
-scrollSpeed = 3
+scrollSpeedStar = 2
 
 -- character image with width and height
 local star = display.newImageRect("Images/star.png", 500, 500)
@@ -47,19 +47,19 @@ local star = display.newImageRect("Images/star.png", 500, 500)
 -- set the image to be transperent
 star.alpha = 0
 
--- set the initial x and y position of beetleship
-star.x = 0
-star.y = display.contentHeight*3/3
--- Function: MoveShip
+-- set the initial x and y position of star
+star.x = 1000
+star.y = display.contentHeight*2/3
+
+-- Function: MoveStar
 -- Input: this function accepts an event listener
 -- Output: none
--- Description: this function adds the scroll speed to the x-value of the ship
+-- Description: this function adds the scroll speed to the x-value of the star
 local function MoveStar(event)
 	-- adds the scroll speed to the x-value of the star
-	star.x = star.x - scrollSpeed
-	-- change the transperency of the ship every time it ,moves so that it fades out
+	star.x = star.x - scrollSpeedStar
+	-- change the transperency of the star every time it moves so that it fades out
 	star.alpha = star.alpha + 0.01
 end
 
--- MoveShip will be called over and over again
 Runtime:addEventListener("enterFrame", MoveStar)
