@@ -80,7 +80,7 @@ areaOfCircle = radius * radius * pi
 
 -- write the area on the screen take into consideration the size of the font when positioning it on the screen
 areaText = display.newText("The area of this circle with a radius of \n" ..
-	areaOfCircle .. " pixels². " , 0, 0, Arial, textSize)
+	radius .. " is " .. areaOfCircle .. " pixels². " , 0, 0, Arial, textSize)
 
 -- anchor the text and set its (x,y) position
 areaText.anchorX = 0
