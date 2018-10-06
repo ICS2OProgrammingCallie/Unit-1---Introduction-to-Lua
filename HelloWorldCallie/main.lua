@@ -14,15 +14,16 @@ display.setStatusBar(display.HiddenStatusBar)
 display.setDefault("background", 154/255, 249/255, 199/255)
 
 -- create a local variable
-local textObject
+local textObject1
+local textObject2
 
 -- displays text on the screen at position x = 500 and y = 500 with
 -- a deafult font style and font size of 50
-textObject = display.newText( "Hello, World!", 500, 225, nil, 85)
+textObject1 = display.newText( "Hello, World!", 500, 225, nil, 85)
 
 -- sets the color of the text
 textObject:setTextColor(155/255, 42/255, 198/255)
 
 -- displays text on the screen at position x = 500 and y = 500 with
 -- a deafult font style and font size of 50
-textObject = display.newText( "By: Callie", 500, 400, nil, 85)
+textObject2 = display.newText( "By: Callie", 500, 400, nil, 85)
