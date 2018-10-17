@@ -37,7 +37,6 @@ local function AskQuestion()
 	randomOperator = math.random(1, 3)
 
 	if ( randomOperator == "1") then
-
 		correctAnswer = randomNumber1 + randomNumber2
 	
 		-- create question in text object
@@ -50,7 +49,7 @@ local function AskQuestion()
 		-- create question in text object
 		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
 
-	else (randomOperator == "3") then
+	elseif (randomOperator == "3") then
 
 		correctAnswer = randomNumber1 * randomNumber2
 	
@@ -84,9 +83,13 @@ local function numericFieldListener( event )
 
 
 		-- if the users answer and the correct answer are the same:
-		else (userAnswer == correctAnswer) then
+		elseif (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
 			timer.performWithDelay(2000, HideCorrect)
+
+		elseif (userAnswer == incorrectAnswer) then
+			correctObject.isVisible = false
+			timer.performWithDelay(2000, HideIncorrect)
 		end
 	end
 end
@@ -114,3 +117,11 @@ numericField = native.newTextField( display.contentWidth/2, display.contentHeigh
 numericField.inputType = "number"
 
 -- add the event listener for the numeric field
+numericField:addEventListener( "userInput", numericFieldListener )
+
+----------------------------------------------------------------------------------------
+-- FUNCTION CALLS
+----------------------------------------------------------------------------------------
+
+-- call the function to ask the question
+AskQuestion()
