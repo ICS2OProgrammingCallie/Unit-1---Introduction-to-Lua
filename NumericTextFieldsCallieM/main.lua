@@ -113,21 +113,21 @@ end
 ----------------------------------------------------------------------------------------
 
 -- displays an object and sets the colour
-questionObject = display.newText( "", display.contentWidth/3, display.contentHeight/2, nil, 50 )
+questionObject = display.newText( "", display.contentWidth/2, display.contentHeight/2, nil, 75 )
 questionObject:setTextColor(204/255, 153/255, 255/255)
 
 -- create the correct text and make it invisible
-correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2.5/3, nil, 75 )
 correctObject:setTextColor(204/255, 153/255, 255/255)
 correctObject.isVisible = false
 
 -- create the incorrect text object make it invisible
-incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*2.5/3, nil, 75)
 incorrectObject:setTextColor(204/255, 153/255, 255/255)
 incorrectObject.isVisible = false
 
 -- Create numeric field
-NumericField = native.newTextField( display.contentWidth/2, display.contentHeight/2, 150, 80)
+NumericField = native.newTextField( display.contentWidth/2, display.contentHeight/1.5, 200, 80)
 NumericField.inputType = "number"
 
 -- add the event listener for the numeric field

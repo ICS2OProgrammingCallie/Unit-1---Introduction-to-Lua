@@ -22,8 +22,18 @@ local textObject2
 textObject1 = display.newText( "Hello, World!", 500, 225, nil, 85)
 
 -- sets the color of the text
-textObject:setTextColor(155/255, 42/255, 198/255)
+textObject1:setTextColor(155/255, 42/255, 198/255)
 
 -- displays text on the screen at position x = 500 and y = 500 with
 -- a deafult font style and font size of 50
 textObject2 = display.newText( "By: Callie", 500, 400, nil, 85)
+
+-- sets the color of the text
+textObject2:setTextColor(155/255, 42/255, 198/255)
+
+-- add the variables for sound
+local backgroundMusic = audio.loadSound( "Sounds/sunnyMusic.WAV" )
+local backgroundMusicChannel
+
+-- play the music
+backgroundMusicChannel = audio.play(backgroundMusic)
