@@ -25,6 +25,7 @@ local randomNumber2
 local userAnswer
 local correctAnswer
 local incorrectAnswer
+
 ----------------------------------------------------------------------------------------
 -- SOUNDS
 ----------------------------------------------------------------------------------------
@@ -85,7 +86,7 @@ local function NumericFieldListener( event )
 		--clear text field
 		event.target.text = ""
 
-	elseif event.phase == "submitted" then
+	elseif (event.phase == "submitted") then
 
 		-- when the answer is submitted (enter key is pressed) set user input to user's answer
 		userAnswer = tonumber(event.target.text)
@@ -93,18 +94,17 @@ local function NumericFieldListener( event )
 		-- if the users answer and the correct answer are the same:
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
-			event.target.text = ""
 			correctSoundChannel = audio.play(correctSound)
 			timer.performWithDelay(2000, HideCorrect)
 
 
 		-- if the users answer and the incorrect answer are the same:
-		elseif (userAnswer == incorrectAnswer) then
+		else
 			incorrectObject.isVisible = true
-			event.target.text = ""
-			incorrectSoundChannel = audio.play(correctSound)
+			incorrectSoundChannel = audio.play(incorrectSound)
 			timer.performWithDelay(2000, HideIncorrect)
 		end
+		event.target.text = ""
 	end
 end
 
