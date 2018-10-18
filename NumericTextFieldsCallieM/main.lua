@@ -18,38 +18,46 @@ display.setDefault("background", 204/255, 0/255, 102/255)
 -- create local variables
 local questionObject
 local correctObject
+local incorrectObject
 local numericField
 local randomNumber1
 local randomNumber2
 local userAnswer
 local correctAnswer
-local incorrectObject
+local incorrectAnswer
+----------------------------------------------------------------------------------------
+-- SOUNDS
+----------------------------------------------------------------------------------------
+
+local correctSound = audio.loadSound( "Sounds/correctSound.mp3" )
+local correctSoundChannel
+local incorrectSound = audio.loadSound( "Sounds/wrongSound.mp3")
+local incorrectSoundChannel
 
 ----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 ----------------------------------------------------------------------------------------
 
 local function AskQuestion()
-	
 	-- generate 2 random numbers between a max. and a min. number
 	randomNumber1 = math.random(0, 10)
 	randomNumber2 = math.random(0, 10)
 	randomOperator = math.random(1, 3)
 
-	if ( randomOperator == "1") then
+	if ( randomOperator == 1) then
 		correctAnswer = randomNumber1 + randomNumber2
 	
 		-- create question in text object
 		questionObject.text = randomNumber1 .. " + " .. randomNumber2 .. " = "
 
-	elseif ( randomOperator == "2") then
+	elseif ( randomOperator == 2) then
 
 		correctAnswer = randomNumber1 - randomNumber2
 	
 		-- create question in text object
 		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
 
-	elseif (randomOperator == "3") then
+	elseif (randomOperator == 3) then
 
 		correctAnswer = randomNumber1 * randomNumber2
 	
@@ -61,9 +69,15 @@ end
 local function HideCorrect()
 	correctObject.isVisible = false
 	AskQuestion()
-end 
+end
 
-local function numericFieldListener( event )
+local function HideIncorrect()
+	incorrectObject.isVisible = false
+	AskQuestion()
+end
+
+
+local function NumericFieldListener( event )
 
 	-- User begins editing "numericField"
 	if ( event.phase == "began" ) then
@@ -79,16 +93,16 @@ local function numericFieldListener( event )
 		-- if the users answer and the correct answer are the same:
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
+			event.target.text = ""
+			correctSoundChannel = audio.play(correctSound)
 			timer.performWithDelay(2000, HideCorrect)
 
 
-		-- if the users answer and the correct answer are the same:
-		elseif (userAnswer == correctAnswer) then
-			correctObject.isVisible = true
-			timer.performWithDelay(2000, HideCorrect)
-
+		-- if the users answer and the incorrect answer are the same:
 		elseif (userAnswer == incorrectAnswer) then
-			correctObject.isVisible = false
+			incorrectObject.isVisible = true
+			event.target.text = ""
+			incorrectSoundChannel = audio.play(correctSound)
 			timer.performWithDelay(2000, HideIncorrect)
 		end
 	end
@@ -113,11 +127,11 @@ incorrectObject:setTextColor(204/255, 153/255, 255/255)
 incorrectObject.isVisible = false
 
 -- Create numeric field
-numericField = native.newTextField( display.contentWidth/2, display.contentHeight/2, 150, 80)
-numericField.inputType = "number"
+NumericField = native.newTextField( display.contentWidth/2, display.contentHeight/2, 150, 80)
+NumericField.inputType = "number"
 
 -- add the event listener for the numeric field
-numericField:addEventListener( "userInput", numericFieldListener )
+NumericField:addEventListener( "userInput", NumericFieldListener )
 
 ----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
