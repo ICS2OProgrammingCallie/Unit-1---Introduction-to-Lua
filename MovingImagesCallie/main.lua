@@ -9,6 +9,12 @@ display.setStatusBar(display.HiddenStatusBar)
 -- global variables
 scrollSpeed = 3
 
+-- local variables for sound
+local carSound = audio.loadSound( "Sounds/carSound.WAV")
+local carSoundChannel
+-- play the sound as the car moves
+carSoundChannel = audio.play(carSound)
+
 -- background image with width and height
 local backgroundImage = display.newImageRect("Images/background.png", 2048, 1536)
 
