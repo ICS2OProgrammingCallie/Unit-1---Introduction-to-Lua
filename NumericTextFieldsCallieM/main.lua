@@ -25,6 +25,8 @@ local randomNumber2
 local userAnswer
 local correctAnswer
 local incorrectAnswer
+local numberOfPoints = 0
+local points 
 
 ----------------------------------------------------------------------------------------
 -- SOUNDS
@@ -41,8 +43,8 @@ local incorrectSoundChannel
 
 local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
-	randomNumber1 = math.random(0, 10)
-	randomNumber2 = math.random(0, 10)
+	randomNumber1 = math.random(0, 15)
+	randomNumber2 = math.random(0, 15)
 	randomOperator = math.random(1, 3)
 
 	if ( randomOperator == 1) then
@@ -95,14 +97,14 @@ local function NumericFieldListener( event )
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
 			correctSoundChannel = audio.play(correctSound)
-			timer.performWithDelay(2000, HideCorrect)
+			timer.performWithDelay(2100, HideCorrect)
 
 
 		-- if the users answer and the incorrect answer are the same:
 		else
 			incorrectObject.isVisible = true
 			incorrectSoundChannel = audio.play(incorrectSound)
-			timer.performWithDelay(2000, HideIncorrect)
+			timer.performWithDelay(2100, HideIncorrect)
 		end
 		event.target.text = ""
 	end
@@ -118,12 +120,12 @@ questionObject:setTextColor(204/255, 153/255, 255/255)
 
 -- create the correct text and make it invisible
 correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2.5/3, nil, 75 )
-correctObject:setTextColor(204/255, 153/255, 255/255)
+correctObject:setTextColor(230/255, 51/255, 51/255)
 correctObject.isVisible = false
 
 -- create the incorrect text object make it invisible
 incorrectObject = display.newText( "Incorrect!", display.contentWidth/2, display.contentHeight*2.5/3, nil, 75)
-incorrectObject:setTextColor(204/255, 153/255, 255/255)
+incorrectObject:setTextColor(51/255, 123/255, 230/255)
 incorrectObject.isVisible = false
 
 -- Create numeric field

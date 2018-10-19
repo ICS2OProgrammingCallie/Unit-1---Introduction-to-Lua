@@ -11,6 +11,10 @@ display.setDefault ("background", 177/255, 88/255, 80/255)
 -- hide status bar
 display.setStatusBar(display.HiddenStatusBar)
 
+-- variables for sound
+local whackSound = audio.loadSound( "Sounds/whackSound.WAV" )
+local whackSoundChannel
+
 -- create blue button, set its position and make it visible
 local blueButton = display.newImageRect("Images/Fast Button Inactive@2x.png",198, 96)
 blueButton.x = display.contentWidth/2
@@ -48,6 +52,7 @@ local function BlueButtonListener (touch)
 		redButton.isVisible = true
 		textObject.isVisible = true
 		checkmark.isVisible = true
+		whackSoundChannel = audio.play(whackSound)
 	end
 
 	if (touch.phase == "ended") then

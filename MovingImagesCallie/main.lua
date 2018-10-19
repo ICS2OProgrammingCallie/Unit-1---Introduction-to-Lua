@@ -12,7 +12,8 @@ scrollSpeed = 3
 -- local variables for sound
 local carSound = audio.loadSound( "Sounds/carSound.WAV")
 local carSoundChannel
--- play the sound as the car moves
+
+-- play the sound as the ship moves
 carSoundChannel = audio.play(carSound)
 
 -- background image with width and height
