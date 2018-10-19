@@ -26,7 +26,7 @@ local userAnswer
 local correctAnswer
 local incorrectAnswer
 local numberOfPoints = 0
-local points 
+local points
 
 ----------------------------------------------------------------------------------------
 -- SOUNDS
@@ -98,7 +98,8 @@ local function NumericFieldListener( event )
 			correctObject.isVisible = true
 			correctSoundChannel = audio.play(correctSound)
 			timer.performWithDelay(2100, HideCorrect)
-
+			numberOfPoints = numberOfPoints + 1
+			points.text = "Correct = ".. numberOfPoints
 
 		-- if the users answer and the incorrect answer are the same:
 		else
@@ -134,6 +135,10 @@ NumericField.inputType = "number"
 
 -- add the event listener for the numeric field
 NumericField:addEventListener( "userInput", NumericFieldListener )
+
+-- display text for points
+points = display.newText( "Correct = ".. numberOfPoints, display.contentWidth/3.5, display.contentHeight/5, nil, 50)
+points:setTextColor(30/255, 219/255, 188/255)
 
 ----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
