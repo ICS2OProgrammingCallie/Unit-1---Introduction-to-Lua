@@ -131,7 +131,7 @@ incorrectObject.isVisible = false
 
 -- Create numeric field
 NumericField = native.newTextField( display.contentWidth/2, display.contentHeight/1.5, 200, 80)
-NumericField.inputType = "number"
+NumericField.inputType = "display"
 
 -- add the event listener for the numeric field
 NumericField:addEventListener( "userInput", NumericFieldListener )
