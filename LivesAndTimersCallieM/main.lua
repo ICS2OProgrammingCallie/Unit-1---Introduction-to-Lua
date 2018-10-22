@@ -29,8 +29,8 @@ local numberOfPoints = 0
 local points
 
 -- variables for the timer
-local totalSeconds = 5
-local secondsLeft = 5
+local totalSeconds = 7
+local secondsLeft = 7
 local clockText
 local countDownTimer
 local lives = 4
@@ -121,24 +121,11 @@ local function NumericFieldListener( event )
 	end
 end
 
-local function UpdateTime()
-
-	-- decrement the number of seconds
-	secondsLeft = secondsLeft - 1
-
-	-- display the number of seconds left in the clock object
-	clockText.text = secondsLeft .. ""
-
-	if (secondsLeft == 0 ) then
-		-- reset the number of seconds left
-		secondsLeft = totalSeconds
-		lives = lives - 1
-	end
-end
-
 local function DecreaseLives()
 	
 	-- take away a heart everytime you lose a life
+	lives = lives - 1
+
 	if (lives == 4) then
 		heart4.isVisible = false
 	elseif (lives == 3) then
@@ -150,8 +137,27 @@ local function DecreaseLives()
 	end
 end
 
+
+local function UpdateTime()
+
+	-- decrement the number of seconds
+	secondsLeft = secondsLeft - 1
+
+	-- display the number of seconds left in the clock object
+	clockText.text = "Time: ".. secondsLeft  
+
+	if (secondsLeft == 0 ) then
+		-- reset the number of seconds left
+		secondsLeft = totalSeconds
+		lives = lives - 1
+	-- call the function to ask the question
+		AskQuestion()
+
+	end
+end
+
 -- function that calls the timer
-local function startTimer()
+local function StartTimer()
 	-- create a countdown timer that loops infinitely
 	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
 end
@@ -201,7 +207,7 @@ heart4 = display.newImageRect("Images/heart.png", 100, 100)
 heart4.x = display.contentWidth * 4 / 8
 heart4.y = display.contentHeight * 1 / 7
 
-
+clockText = display.newText ("", display.contentWidth/2, display.contentHeight*2.5/3, nil, 75)
 ----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
 ----------------------------------------------------------------------------------------
@@ -211,3 +217,6 @@ AskQuestion()
 
 -- call the function to decrease lives
 DecreaseLives()
+
+StartTimer()
+

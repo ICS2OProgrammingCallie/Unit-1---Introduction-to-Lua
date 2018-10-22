@@ -44,7 +44,7 @@ checkmark.isVisible = false
 -- Function: BlueButtonlistener
 -- Input: touch listener
 -- Output: none
--- Description: when blue button is clicked, it will make the text appear with the red button,
+-- Description: when blue button is clicked, it will make the text and sound appear with the red button, 
 -- and make the blue button disappear
 local function BlueButtonListener (touch)
 	if (touch.phase == "began") then
