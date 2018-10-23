@@ -125,7 +125,7 @@ end
 local function UpdateHearts()
 
 	if (userAnswer == incorrectAnswer) then
-
+			
 		if (lives == 4) then
 			lives = lives - 1
 			heart4.isVisible = false
@@ -166,6 +166,7 @@ local function UpdateTime()
 		-- reset the number of seconds left
 		secondsLeft = totalSeconds
 		lives = lives - 1
+		AskQuestion()
 	end
 end
 
