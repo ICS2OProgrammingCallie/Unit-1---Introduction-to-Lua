@@ -51,36 +51,6 @@ local incorrectSoundChannel
 -- LOCAL FUNCTIONS
 ----------------------------------------------------------------------------------------
 
-local function UpdateTime()
-
-	-- decrement the number of seconds
-	secondsLeft = secondsLeft - 1
-
-	-- display the number of seconds left in the clock object
-	clockText.text = "Time: ".. secondsLeft  
-
-	if (secondsLeft == 0 ) then
-		-- reset the number of seconds left
-		secondsLeft = totalSeconds
-		lives = lives - 1
-
-		if (lives == 4) then
-			heart4.isVisible = false
-		elseif (lives == 3) then
-			heart3.isVisible = false
-		elseif (lives == 2) then
-			heart2.isVisible = false
-		elseif (lives == 1) then
-			heart1.isVisible = false
-		end
-	end
-end
-
--- function that calls the timer
-local function StartTimer()
-	-- create a countdown timer that loops infinitely
-	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
-end
 
 local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
@@ -147,12 +117,63 @@ local function NumericFieldListener( event )
 			incorrectObject.isVisible = true
 			incorrectSoundChannel = audio.play(incorrectSound)
 			timer.performWithDelay(2100, HideIncorrect)
-			lives = lives - 1
 		end
 		event.target.text = ""
 	end
 end
 
+local function UpdateHearts()
+
+	if (userAnswer == incorrectAnswer) then
+
+		if (lives == 4) then
+			lives = lives - 1
+			heart4.isVisible = false
+			heart3.isVisible = true
+			heart2.isVisible = true
+			heart1.isVisible = true
+		elseif (lives == 3) then
+			lives = lives - 1
+			heart4.isVisible = true
+			heart3.isVisible = false
+			heart2.isVisible = true
+			heart1.isVisible = true
+		elseif (lives == 2) then
+			lives = lives - 1
+			heart4.isVisible = true
+			heart3.isVisible = true
+			heart2.isVisible = false
+			heart1.isVisible = true
+		elseif (lives == 1) then
+			lives = lives - 1
+			heart4.isVisible = true
+			heart3.isVisible = true
+			heart2.isVisible = true
+			heart1.isVisible = false
+		end
+	end
+end
+
+local function UpdateTime()
+
+	-- decrement the number of seconds
+	secondsLeft = secondsLeft - 1
+
+	-- display the number of seconds left in the clock object
+	clockText.text = "Time: ".. secondsLeft  
+
+	if (secondsLeft == 0 ) then
+		-- reset the number of seconds left
+		secondsLeft = totalSeconds
+		lives = lives - 1
+	end
+end
+
+-- function that calls the timer
+local function StartTimer()
+	-- create a countdown timer that loops infinitely
+	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
+end
 
 ----------------------------------------------------------------------------------------
 -- OBJECT CREATION
@@ -208,5 +229,11 @@ clockText = display.newText ("", display.contentWidth/3, display.contentHeight*1
 -- call the function to ask the question
 AskQuestion()
 
+-- call the function to remove hearts
+UpdateHearts()
+
+-- Call the timer
 StartTimer()
+
+
 
