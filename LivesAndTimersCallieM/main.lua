@@ -33,7 +33,7 @@ local totalSeconds = 7
 local secondsLeft = 7
 local clockText
 local countDownTimer
-local lives = 4
+local lives = 5
 local heart1
 local heart2
 local heart3
@@ -80,6 +80,35 @@ local function AskQuestion()
     end
 end
 
+local function UpdateHearts()
+
+	if (lives == 4) then
+
+		heart4.isVisible = false
+
+	elseif (lives == 3) then
+
+		heart3.isVisible = false
+
+	elseif (lives == 2) then
+
+		heart2.isVisible = false
+
+	elseif (lives == 1) then
+
+		heart1.isVisible = false
+
+	elseif (lives == 0) then
+		heart1.isVisible = false
+		heart2.isVisible = false
+		heart3.isVisible = false
+		heart4.isVisible = false
+	end
+
+	lives = lives -1
+
+end
+
 local function HideCorrect()
 	correctObject.isVisible = false
 	AskQuestion()
@@ -89,7 +118,6 @@ local function HideIncorrect()
 	incorrectObject.isVisible = false
 	AskQuestion()
 end
-
 
 local function NumericFieldListener( event )
 
@@ -117,42 +145,13 @@ local function NumericFieldListener( event )
 			incorrectObject.isVisible = true
 			incorrectSoundChannel = audio.play(incorrectSound)
 			timer.performWithDelay(2100, HideIncorrect)
+			lives = lives - 1
+			UpdateHearts()
 		end
 		event.target.text = ""
 	end
 end
 
-local function UpdateHearts()
-
-	if (userAnswer == incorrectAnswer) then
-			
-		if (lives == 4) then
-			lives = lives - 1
-			heart4.isVisible = false
-			heart3.isVisible = true
-			heart2.isVisible = true
-			heart1.isVisible = true
-		elseif (lives == 3) then
-			lives = lives - 1
-			heart4.isVisible = true
-			heart3.isVisible = false
-			heart2.isVisible = true
-			heart1.isVisible = true
-		elseif (lives == 2) then
-			lives = lives - 1
-			heart4.isVisible = true
-			heart3.isVisible = true
-			heart2.isVisible = false
-			heart1.isVisible = true
-		elseif (lives == 1) then
-			lives = lives - 1
-			heart4.isVisible = true
-			heart3.isVisible = true
-			heart2.isVisible = true
-			heart1.isVisible = false
-		end
-	end
-end
 
 local function UpdateTime()
 
@@ -166,6 +165,7 @@ local function UpdateTime()
 		-- reset the number of seconds left
 		secondsLeft = totalSeconds
 		lives = lives - 1
+		UpdateHearts()
 		AskQuestion()
 	end
 end
