@@ -29,15 +29,18 @@ local numberOfPoints = 0
 local points
 
 -- variables for the timer
-local totalSeconds = 7
-local secondsLeft = 7
+local totalSeconds = 10
+local secondsLeft = 10
 local clockText
 local countDownTimer
 local lives = 5
+
+-- Variables for the images
 local heart1
 local heart2
 local heart3
 local heart4
+local gameOver
 ----------------------------------------------------------------------------------------
 -- SOUNDS
 ----------------------------------------------------------------------------------------
@@ -46,11 +49,11 @@ local correctSound = audio.loadSound( "Sounds/correctSound.mp3" )
 local correctSoundChannel
 local incorrectSound = audio.loadSound( "Sounds/wrongSound.mp3")
 local incorrectSoundChannel
-
+local gameOverSound= audio.loadSound( "Sounds/gameOverSound.WAV")
+local gameOverSoundChannel
 ----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 ----------------------------------------------------------------------------------------
-
 
 local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
@@ -97,12 +100,12 @@ local function UpdateHearts()
 	elseif (lives == 1) then
 
 		heart1.isVisible = false
+		gameOver = display.newImageRect("Images/gameOver.png", display.contentWidth, display.contentHeight)
+		gameOver.x = display.contentWidth * 1/2
+		gameOver.y = display.contentHeight * 1/2
+		NumericField.isVisible = false
+		gameOverSoundChannel = audio.play(gameOverSound)
 
-	elseif (lives == 0) then
-		heart1.isVisible = false
-		heart2.isVisible = false
-		heart3.isVisible = false
-		heart4.isVisible = false
 	end
 
 	lives = lives -1
@@ -117,6 +120,23 @@ end
 local function HideIncorrect()
 	incorrectObject.isVisible = false
 	AskQuestion()
+end
+
+local function UpdateTime()
+
+	-- decrement the number of seconds
+	secondsLeft = secondsLeft - 1
+
+	-- display the number of seconds left in the clock object
+	clockText.text = "Time: ".. secondsLeft  
+
+	if (secondsLeft == 0 ) then
+		-- reset the number of seconds left
+		UpdateHearts()
+		incorrectSoundChannel = audio.play(incorrectSound)
+		secondsLeft = totalSeconds
+		AskQuestion()
+	end
 end
 
 local function NumericFieldListener( event )
@@ -139,34 +159,17 @@ local function NumericFieldListener( event )
 			timer.performWithDelay(2100, HideCorrect)
 			numberOfPoints = numberOfPoints + 1
 			points.text = "Correct = ".. numberOfPoints
+			secondsLeft = totalSeconds
 
 		-- if the users answer and the incorrect answer are the same:
 		else
 			incorrectObject.isVisible = true
 			incorrectSoundChannel = audio.play(incorrectSound)
 			timer.performWithDelay(2100, HideIncorrect)
-			lives = lives - 1
 			UpdateHearts()
+			secondsLeft = totalSeconds
 		end
 		event.target.text = ""
-	end
-end
-
-
-local function UpdateTime()
-
-	-- decrement the number of seconds
-	secondsLeft = secondsLeft - 1
-
-	-- display the number of seconds left in the clock object
-	clockText.text = "Time: ".. secondsLeft  
-
-	if (secondsLeft == 0 ) then
-		-- reset the number of seconds left
-		secondsLeft = totalSeconds
-		lives = lives - 1
-		UpdateHearts()
-		AskQuestion()
 	end
 end
 
@@ -222,7 +225,9 @@ heart4 = display.newImageRect("Images/heart.png", 100, 100)
 heart4.x = display.contentWidth * 4 / 8
 heart4.y = display.contentHeight * 1 / 7
 
+-- display the timer on the screen
 clockText = display.newText ("", display.contentWidth/3, display.contentHeight*1/3, nil, 75)
+
 ----------------------------------------------------------------------------------------
 -- FUNCTION CALLS
 ----------------------------------------------------------------------------------------
