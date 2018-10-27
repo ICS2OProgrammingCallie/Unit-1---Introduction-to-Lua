@@ -25,10 +25,12 @@ local randomNumber2
 local userAnswer
 local correctAnswer
 local incorrectAnswer
+
+-- variables for points
 local numberOfPoints = 0
 local points
 
--- variables for the timer
+-- variables for the timer and lives
 local totalSeconds = 10
 local secondsLeft = 10
 local clockText
@@ -51,6 +53,7 @@ local incorrectSound = audio.loadSound( "Sounds/wrongSound.mp3")
 local incorrectSoundChannel
 local gameOverSound= audio.loadSound( "Sounds/gameOverSound.WAV")
 local gameOverSoundChannel
+
 ----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 ----------------------------------------------------------------------------------------
@@ -85,6 +88,7 @@ end
 
 local function UpdateHearts()
 
+	-- make the hearts dissapear when you lose a life
 	if (lives == 4) then
 
 		heart4.isVisible = false
@@ -99,6 +103,7 @@ local function UpdateHearts()
 
 	elseif (lives == 1) then
 
+		-- when no lives left, game over image and sound will show
 		heart1.isVisible = false
 		gameOver = display.newImageRect("Images/gameOver.png", display.contentWidth, display.contentHeight)
 		gameOver.x = display.contentWidth * 1/2
