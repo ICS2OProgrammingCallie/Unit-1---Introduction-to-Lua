@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------------------
--- Title: Numeric Textfield
+-- Title: Lives and Timers
 -- Name: Callie McWaters
 -- Course: ICS20
--- This program displays a math question and asks the user to answer in a numeric textfield
+-- This program displays a math question and asks the user to answer in a certain amounty of time with four lives 
 ----------------------------------------------------------------------------------------
 
 -- hide the status bar
