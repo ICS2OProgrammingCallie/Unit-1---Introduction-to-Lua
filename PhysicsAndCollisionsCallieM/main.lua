@@ -99,7 +99,7 @@ local function secondBall()
 end
 
 --create the third ball
-local function thridBall()
+local function thirdBall()
 	local ball3 = display.newImage("Images/super_ball.png", 0, 0)
 	--add physics
 	physics.addBody(ball3, {density=1.7, friction=0.3, bounce=1.7, radius=30})

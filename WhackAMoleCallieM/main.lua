@@ -21,7 +21,7 @@ local bkgMusicChannel
 -- play the background music
 bkgMusicChannel = audio.play(bkgMusic)
 
--- Creating Mole
+-- Creating Bird
 
 local tweetyBird = display.newImage( "Images/tweetyBird.png" , 0, 0)
 
@@ -53,7 +53,7 @@ function PopUp()
 	tweetyBird.x = math.random( 0, display.contentWidth )
 	tweetyBird.y = math.random( 0, display.contentHeight )
 	tweetyBird.isVisible = true
-	timer.performWithDelay( 1000, Hide)
+	timer.performWithDelay( 700, Hide)
 end
 
 -- this function calls the pop up after 2 seconds
@@ -79,8 +79,7 @@ function Whacked( event )
 	if (event.phase == "began") then
 		whackSoundChannel = audio.play(whackSound)
 		numberOfPoints = numberOfPoints + 1
-		score.text = "Score = ".. numberOfPoints
-		PopUp()
+		score.text = "Score = ".. numberOfPoints		
 	
 	end
 end
