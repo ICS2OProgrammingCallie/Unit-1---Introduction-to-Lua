@@ -7,15 +7,19 @@
 -----------------------------------------------------------------------------------------
 
 -- hide the status bar
---display.setStatusBar(display.hiddenStatusBar)
+display.setStatusBar(display.HiddenStatusBar)
 
 -- Creating background
-
 display.setDefault("background", 34/255, 236/255, 229/255)
 
 -- adding sound
 local whackSound = audio.loadSound( "Sounds/whackSound.mp3")
 local whackSoundChannel
+local bkgMusic = audio.loadSound( "Sounds/bkgMusic.mp3")
+local bkgMusicChannel
+
+-- play the background music
+bkgMusicChannel = audio.play(bkgMusic)
 
 -- Creating Mole
 
@@ -24,7 +28,7 @@ local tweetyBird = display.newImage( "Images/tweetyBird.png" , 0, 0)
 -- set the image position
 tweetyBird.x = display.contentCenterX
 tweetyBird.y = display.contentCenterY
-tweetyBird:scale(1/3, 1/3)
+tweetyBird:scale(2.5/10, 2.5/10)
 tweetyBird.isVisible = false
 
 -----------------------------------------------------------------------------------------
@@ -49,12 +53,12 @@ function PopUp()
 	tweetyBird.x = math.random( 0, display.contentWidth )
 	tweetyBird.y = math.random( 0, display.contentHeight )
 	tweetyBird.isVisible = true
-	timer.performWithDelay(200, HideTweetyBird)
+	timer.performWithDelay( 1000, Hide)
 end
 
--- this function calls the pop up after 3 seconds
+-- this function calls the pop up after 2 seconds
 function PopUpDelay()
-	timer.performWithDelay( 500, PopUp )
+	timer.performWithDelay( 2000, PopUp )
 end
 
 -- This function makes the mole invisible and then calls the PopUpDelay function
@@ -77,6 +81,7 @@ function Whacked( event )
 		numberOfPoints = numberOfPoints + 1
 		score.text = "Score = ".. numberOfPoints
 		PopUp()
+	
 	end
 end
 
