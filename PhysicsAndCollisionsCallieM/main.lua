@@ -120,5 +120,5 @@ end
 -----------------------------------------------------------------------------------------
 timer.performWithDelay( 0, firstBall)
 timer.performWithDelay( 500, secondBall)
-timer.performWithDelay( 1300, thridBall)
+timer.performWithDelay( 1300, thirdBall)
 timer.performWithDelay( 2000, fourthBall)

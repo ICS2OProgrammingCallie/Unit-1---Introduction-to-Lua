@@ -35,18 +35,18 @@ tweetyBird.isVisible = false
 -- Score
 -----------------------------------------------------------------------------------------
 
-local score
+local scoreObject
 local numberOfPoints = 0
 
 -- display text for the score
-score = display.newText( "Score = ".. numberOfPoints, display.contentWidth/3.5, display.contentHeight/1.5, nil, 75)
-score:setTextColor(185/255, 118/255, 243/255)
+scoreObject = display.newText( "Score = ".. numberOfPoints, display.contentWidth/3.5, display.contentHeight/1.5, nil, 75)
+scoreObject:setTextColor(185/255, 118/255, 243/255)
 
 -----------------------------------------------------------------------------------------
 -- Local Functions
 -----------------------------------------------------------------------------------------
 
--- Make the mole appear in a random position
+-- Make the bird appear in a random position
 function PopUp()
 
 	-- Choosing a random position on the screen
@@ -58,10 +58,10 @@ end
 
 -- this function calls the pop up after 2 seconds
 function PopUpDelay()
-	timer.performWithDelay( 2000, PopUp )
+	timer.performWithDelay( 1000, PopUp )
 end
 
--- This function makes the mole invisible and then calls the PopUpDelay function
+-- This function makes the bird invisible and then calls the PopUpDelay function
 function Hide()
 	tweetyBird.isVisible = false
 	PopUpDelay()
@@ -72,19 +72,19 @@ function GameStart()
 	PopUpDelay()
 end
 
--- This function increments the score only if the mole is clicked. It then displays the
+-- This function increments the score only if the bird is clicked. It then displays the
 -- new score.
 function Whacked( event )
 
 	if (event.phase == "began") then
 		whackSoundChannel = audio.play(whackSound)
 		numberOfPoints = numberOfPoints + 1
-		score.text = "Score = ".. numberOfPoints		
+		scoreObject.text = "Score = ".. numberOfPoints		
 	
 	end
 end
 
--- event listener for when the mole is whacked
+-- event listener for when the bird is whacked
 tweetyBird:addEventListener( "touch", Whacked )
 
 -- start the game
