@@ -6,7 +6,7 @@
 ----------------------------------------------------------------------------------------
 
 -- hide the status bar
-display.setStatusBar(display.HiddenStatusBar)
+display.setStatusBar(display.HiddenStatusBar)--
 
 -- sets the background colour
 display.setDefault("background", 204/255, 0/255, 102/255)
